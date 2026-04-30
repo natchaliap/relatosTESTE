@@ -5,327 +5,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Guardian Simplificado</title>
 
-  <style><head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Guardian Simplificado</title>
   <style>
-    ...
-  </style>
-</head>
-
-<body>
-  <img src="assets/comportamento.png" alt="Comportamento">
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #f3f5f4;
       color: #1f2933;
+      text-align: center;
     }
 
     .hero {
       background: linear-gradient(135deg, #00843d, #00a651);
       color: white;
-      padding: 32px 20px;
-      text-align: center;
-      border-bottom-left-radius: 30px;
-      border-bottom-right-radius: 30px;
+      padding: 40px 20px;
     }
 
     .hero h1 {
       margin: 0;
-      font-size: 28px;
     }
 
-    .hero p {
-      margin-top: 8px;
-      opacity: 0.95;
+    .container {
+      padding: 20px;
     }
 
-    .wrapper {
-      max-width: 1050px;
-      margin: -15px auto 40px;
-      padding: 0 16px;
-    }
-
-    .opcoes-relatorio {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      margin-bottom: 34px;
-    }
-
-    .opcao-card {
-      background: white;
-      border: 2px solid transparent;
-      border-radius: 14px;
-      overflow: hidden;
-      cursor: pointer;
-      box-shadow: 0 5px 14px rgba(0, 0, 0, 0.18);
-      transition: 0.2s ease;
-    }
-
-    .opcao-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
-    }
-
-    .opcao-card.ativo {
-      border: 2px solid #008843;
-      box-shadow: 0 0 0 3px rgba(0, 136, 67, 0.18);
-      transform: scale(1.02);
-    }
-
-    .opcao-icon {
-      height: 135px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .opcao-icon img {
-      max-width: 105px;
-      max-height: 105px;
-      object-fit: contain;
-    }
-
-    .opcao-footer {
-      background: #f7f7f7;
-      text-align: center;
-      padding: 18px 12px;
-    }
-
-    .opcao-footer span {
-      display: block;
-      font-size: 14px;
-      color: #000;
-    }
-
-    .opcao-footer strong {
-      display: block;
-      margin-top: 5px;
-      font-size: 20px;
-      color: #000;
-    }
-
-    .conteudo {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 18px;
-      padding: 24px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
-    }
-
-    .card h2 {
-      margin-top: 0;
-      font-size: 22px;
-    }
-
-    label {
-      display: block;
-      margin: 16px 0 6px;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    input,
-    textarea {
+    img {
+      max-width: 300px;
       width: 100%;
-      box-sizing: border-box;
-      padding: 12px;
-      border: 1px solid #cfd6dd;
-      border-radius: 8px;
-      font-size: 14px;
-      font-family: Arial, sans-serif;
+      margin: 20px auto;
+      display: block;
     }
 
-    textarea {
-      min-height: 90px;
-      resize: vertical;
-    }
-
-    .tipo-selecionado {
-      margin-top: 14px;
-      padding: 12px;
-      border-radius: 8px;
-      background: #eefaf3;
-      color: #008843;
-      font-weight: bold;
-      display: none;
-    }
-
-    button.salvar {
-      width: 100%;
-      margin-top: 18px;
-      padding: 13px;
+    button {
+      padding: 12px 20px;
+      background: #00843d;
+      color: white;
       border: none;
       border-radius: 8px;
-      background: #008843;
-      color: white;
-      font-weight: bold;
       cursor: pointer;
-      font-size: 15px;
+      font-size: 16px;
     }
 
-    button.salvar:hover {
-      background: #006f36;
-    }
-
-    .vazio {
-      text-align: center;
-      color: #667085;
-      margin-top: 35px;
-      font-size: 14px;
-    }
-
-    .relato-item {
-      border-top: 1px solid #e5e7eb;
-      padding: 14px 0;
-      font-size: 14px;
-    }
-
-    .relato-item strong {
-      color: #008843;
-    }
-
-    @media (max-width: 850px) {
-      .opcoes-relatorio,
-      .conteudo {
-        grid-template-columns: 1fr;
-      }
+    button:hover {
+      background: #006b31;
     }
   </style>
 </head>
 
 <body>
-  <header class="hero">
-    <h1>Guardian</h1>
-    <p>Relatos de Segurança</p>
-  </header>
 
-  <main class="wrapper">
+  <div class="hero">
+    <h1>Guardian Simplificado</h1>
+    <p>Registro de Ocorrências</p>
+  </div>
 
-    <section class="opcoes-relatorio">
-      <div class="opcao-card" onclick="selecionarTipo(this, 'Comportamento')">
-        <div class="opcao-icon">
-          <img src="comportamento.png" alt="Comportamento">
-        </div>
-        <div class="opcao-footer">
-          <span>Cadastrar</span>
-          <strong>Comportamento</strong>
-        </div>
-      </div>
+  <div class="container">
 
-      <div class="opcao-card" onclick="selecionarTipo(this, 'Condição')">
-        <div class="opcao-icon">
-          <img src="condicao.png" alt="Condição">
-        </div>
-        <div class="opcao-footer">
-          <span>Cadastrar</span>
-          <strong>Condição</strong>
-        </div>
-      </div>
+    <!-- IMAGEM CORRETA -->
+    <img src="assets/comportamento.png" alt="Comportamento">
 
-      <div class="opcao-card" onclick="selecionarTipo(this, 'Incidente')">
-        <div class="opcao-icon">
-          <img src="incidente.png" alt="Incidente">
-        </div>
-        <div class="opcao-footer">
-          <span>Cadastrar</span>
-          <strong>Incidente</strong>
-        </div>
-      </div>
-    </section>
+    <button onclick="alert('Botão funcionando!')">
+      Registrar ocorrência
+    </button>
 
-    <section class="conteudo">
-      <div class="card">
-        <h2>Novo relato</h2>
+  </div>
 
-        <form onsubmit="salvarRelato(event)">
-          <input type="hidden" id="tipoRelato" name="tipoRelato">
-
-          <label for="nome">Nome</label>
-          <input id="nome" type="text" placeholder="Digite seu nome">
-
-          <div id="tipoSelecionado" class="tipo-selecionado"></div>
-
-          <label for="observacao">Observação</label>
-          <textarea id="observacao" placeholder="Descreva o que aconteceu"></textarea>
-
-          <button class="salvar" type="submit">Salvar relato</button>
-        </form>
-      </div>
-
-      <div class="card">
-        <h2>Relatos registrados</h2>
-        <div id="listaRelatos">
-          <p class="vazio">Nenhum relato registrado ainda.</p>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <script>
-    function selecionarTipo(elemento, tipo) {
-      document.querySelectorAll('.opcao-card').forEach(card => {
-        card.classList.remove('ativo');
-      });
-
-      elemento.classList.add('ativo');
-
-      document.getElementById('tipoRelato').value = tipo;
-
-      const tipoSelecionado = document.getElementById('tipoSelecionado');
-      tipoSelecionado.style.display = 'block';
-      tipoSelecionado.textContent = 'Tipo selecionado: ' + tipo;
-    }
-
-    function salvarRelato(event) {
-      event.preventDefault();
-
-      const nome = document.getElementById('nome').value.trim();
-      const tipo = document.getElementById('tipoRelato').value;
-      const observacao = document.getElementById('observacao').value.trim();
-
-      if (!tipo) {
-        alert('Selecione um tipo de relato clicando em uma imagem.');
-        return;
-      }
-
-      if (!nome || !observacao) {
-        alert('Preencha nome e observação.');
-        return;
-      }
-
-      const lista = document.getElementById('listaRelatos');
-
-      const vazio = lista.querySelector('.vazio');
-      if (vazio) vazio.remove();
-
-      const item = document.createElement('div');
-      item.className = 'relato-item';
-      item.innerHTML = `
-        <strong>${tipo}</strong><br>
-        Nome: ${nome}<br>
-        Observação: ${observacao}
-      `;
-
-      lista.prepend(item);
-
-      document.querySelector('form').reset();
-      document.getElementById('tipoRelato').value = '';
-      document.getElementById('tipoSelecionado').style.display = 'none';
-
-      document.querySelectorAll('.opcao-card').forEach(card => {
-        card.classList.remove('ativo');
-      });
-    }
-  </script>
 </body>
 </html>
