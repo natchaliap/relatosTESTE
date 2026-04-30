@@ -1,115 +1,321 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#123d6b" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Relatos#>]€]^]^]" />
-  <title>Relatos</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="apple-touch-icon" href="icons/icon-192.png" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guardian Simplificado</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f5f4;
+      color: #1f2933;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #00843d, #00a651);
+      color: white;
+      padding: 32px 20px;
+      text-align: center;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .hero p {
+      margin-top: 8px;
+      opacity: 0.95;
+    }
+
+    .wrapper {
+      max-width: 1050px;
+      margin: -15px auto 40px;
+      padding: 0 16px;
+    }
+
+    .opcoes-relatorio {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-bottom: 34px;
+    }
+
+    .opcao-card {
+      background: white;
+      border: 2px solid transparent;
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 5px 14px rgba(0, 0, 0, 0.18);
+      transition: 0.2s ease;
+    }
+
+    .opcao-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+    }
+
+    .opcao-card.ativo {
+      border: 2px solid #008843;
+      box-shadow: 0 0 0 3px rgba(0, 136, 67, 0.18);
+      transform: scale(1.02);
+    }
+
+    .opcao-icon {
+      height: 135px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .opcao-icon img {
+      max-width: 105px;
+      max-height: 105px;
+      object-fit: contain;
+    }
+
+    .opcao-footer {
+      background: #f7f7f7;
+      text-align: center;
+      padding: 18px 12px;
+    }
+
+    .opcao-footer span {
+      display: block;
+      font-size: 14px;
+      color: #000;
+    }
+
+    .opcao-footer strong {
+      display: block;
+      margin-top: 5px;
+      font-size: 20px;
+      color: #000;
+    }
+
+    .conteudo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 22px;
+    }
+
+    label {
+      display: block;
+      margin: 16px 0 6px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      border: 1px solid #cfd6dd;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: Arial, sans-serif;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .tipo-selecionado {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #eefaf3;
+      color: #008843;
+      font-weight: bold;
+      display: none;
+    }
+
+    button.salvar {
+      width: 100%;
+      margin-top: 18px;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      background: #008843;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button.salvar:hover {
+      background: #006f36;
+    }
+
+    .vazio {
+      text-align: center;
+      color: #667085;
+      margin-top: 35px;
+      font-size: 14px;
+    }
+
+    .relato-item {
+      border-top: 1px solid #e5e7eb;
+      padding: 14px 0;
+      font-size: 14px;
+    }
+
+    .relato-item strong {
+      color: #008843;
+    }
+
+    @media (max-width: 850px) {
+      .opcoes-relatorio,
+      .conteudo {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <div id="loginScreen" class="login-screen">
-    <section class="card login-card">
-      <div class="app-mark">R</div>
-      <p class="eyebrow">Acesso ao app</p>
-      <h1>Relatos</h1>
-      <p class="login-text">Informe sua matrícula para entrar e registrar relatos.</p>
+  <header class="hero">
+    <h1>Guardian</h1>
+    <p>Relatos de Segurança</p>
+  </header>
 
-      <form id="loginForm" class="login-form">
-        <label>
-          Matrícula
-          <input id="matriculaLogin" name="matricula" type="text" inputmode="numeric" placeholder="Digite sua matrícula" required autocomplete="username" />
-        </label>
-        <button class="primary" type="submit">Entrar</button>
-      </form>
+  <main class="wrapper">
+
+    <section class="opcoes-relatorio">
+      <div class="opcao-card" onclick="selecionarTipo(this, 'Comportamento')">
+        <div class="opcao-icon">
+          <img src="comportamento.png" alt="Comportamento">
+        </div>
+        <div class="opcao-footer">
+          <span>Cadastrar</span>
+          <strong>Comportamento</strong>
+        </div>
+      </div>
+
+      <div class="opcao-card" onclick="selecionarTipo(this, 'Condição')">
+        <div class="opcao-icon">
+          <img src="condicao.png" alt="Condição">
+        </div>
+        <div class="opcao-footer">
+          <span>Cadastrar</span>
+          <strong>Condição</strong>
+        </div>
+      </div>
+
+      <div class="opcao-card" onclick="selecionarTipo(this, 'Incidente')">
+        <div class="opcao-icon">
+          <img src="incidente.png" alt="Incidente">
+        </div>
+        <div class="opcao-footer">
+          <span>Cadastrar</span>
+          <strong>Incidente</strong>
+        </div>
+      </div>
     </section>
-  </div>
 
-  <div id="appShell" class="app-shell hidden">
-    <header class="topbar">
-      <div>
-        <p class="eyebrow">PWA de Segurança</p>
-        <h1>Relatos</h1>
-        <p class="user-line">Matrícula: <strong id="matriculaAtiva"></strong></p>
-      </div>
-      <div class="top-actions">
-        <span class="status" id="onlineStatus">Online</span>
-        <button id="sair" class="logout" type="button">Sair</button>
-      </div>
-    </header>
-
-    <main>
-      <section class="card hero">
+    <section class="conteudo">
+      <div class="card">
         <h2>Novo relato</h2>
-        <p>Registre rapidamente situações observadas no trabalho.</p>
-      </section>
 
-      <form id="reportForm" class="card form-card">
-        <label>
-          Nome
-          <input id="nome" name="nome" type="text" placeholder="Digite seu nome" required autocomplete="name" />
-        </label>
+        <form onsubmit="salvarRelato(event)">
+          <input type="hidden" id="tipoRelato" name="tipoRelato">
 
-        <label>
-          Tipo de relato
-          <select id="tipo" name="tipo" required>
-            <option value="">Selecione</option>
-            <option value="EPIs">EPIs</option>
-          </select>
-        </label>
+          <label for="nome">Nome</label>
+          <input id="nome" type="text" placeholder="Digite seu nome">
 
-        <div id="epiArea" class="hidden">
-          <label>
-            EPI observado
-            <select id="epi" name="epi">
-              <option value="">Selecione</option>
-              <option>Capacete</option>
-              <option>Óculos de proteção</option>
-              <option>Luvas</option>
-              <option>Protetor auricular</option>
-              <option>Calçado de segurança</option>
-              <option>Cinto de segurança</option>
-              <option>Máscara/respirador</option>
-              <option>Outro</option>
-            </select>
-          </label>
+          <div id="tipoSelecionado" class="tipo-selecionado"></div>
 
-          <p class="field-title">Problema encontrado</p>
-          <div class="choice-grid">
-            <button type="button" class="choice" data-problema="Não uso">Não uso</button>
-            <button type="button" class="choice" data-problema="Uso incorreto">Uso incorreto</button>
-          </div>
+          <label for="observacao">Observação</label>
+          <textarea id="observacao" placeholder="Descreva o que aconteceu"></textarea>
+
+          <button class="salvar" type="submit">Salvar relato</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Relatos registrados</h2>
+        <div id="listaRelatos">
+          <p class="vazio">Nenhum relato registrado ainda.</p>
         </div>
+      </div>
+    </section>
 
-        <label>
-          Observação
-          <textarea id="observacao" name="observacao" placeholder="Ex.: colaborador sem óculos na área de corte"></textarea>
-        </label>
+  </main>
 
-        <input type="hidden" id="problema" name="problema" />
-        <button class="primary" type="submit">Salvar relato</button>
-      </form>
+  <script>
+    function selecionarTipo(elemento, tipo) {
+      document.querySelectorAll('.opcao-card').forEach(card => {
+        card.classList.remove('ativo');
+      });
 
-      <section class="card">
-        <div class="section-title">
-          <h2>Relatos salvos</h2>
-          <button id="limpar" class="ghost" type="button">Limpar</button>
-        </div>
-        <div id="lista" class="report-list empty">Nenhum relato salvo ainda.</div>
-      </section>
-    </main>
+      elemento.classList.add('ativo');
 
-    <nav class="bottom-nav" aria-label="Navegação principal">
-      <button class="nav-item active" type="button">Relatar</button>
-      <button class="nav-item" id="installBtn" type="button" hidden>Instalar app</button>
-    </nav>
-  </div>
+      document.getElementById('tipoRelato').value = tipo;
 
-  <script src="app.js"></script>
+      const tipoSelecionado = document.getElementById('tipoSelecionado');
+      tipoSelecionado.style.display = 'block';
+      tipoSelecionado.textContent = 'Tipo selecionado: ' + tipo;
+    }
+
+    function salvarRelato(event) {
+      event.preventDefault();
+
+      const nome = document.getElementById('nome').value.trim();
+      const tipo = document.getElementById('tipoRelato').value;
+      const observacao = document.getElementById('observacao').value.trim();
+
+      if (!tipo) {
+        alert('Selecione um tipo de relato clicando em uma imagem.');
+        return;
+      }
+
+      if (!nome || !observacao) {
+        alert('Preencha nome e observação.');
+        return;
+      }
+
+      const lista = document.getElementById('listaRelatos');
+
+      const vazio = lista.querySelector('.vazio');
+      if (vazio) vazio.remove();
+
+      const item = document.createElement('div');
+      item.className = 'relato-item';
+      item.innerHTML = `
+        <strong>${tipo}</strong><br>
+        Nome: ${nome}<br>
+        Observação: ${observacao}
+      `;
+
+      lista.prepend(item);
+
+      document.querySelector('form').reset();
+      document.getElementById('tipoRelato').value = '';
+      document.getElementById('tipoSelecionado').style.display = 'none';
+
+      document.querySelectorAll('.opcao-card').forEach(card => {
+        card.classList.remove('ativo');
+      });
+    }
+  </script>
 </body>
 </html>
