@@ -1,73 +1,138 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guardian Simplificado</title>
 
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f3f5f4;
-      color: #1f2933;
+      background: #f4f6f8;
+      color: #111;
+    }
+
+    header {
+      background: #007a3d;
+      color: white;
+      padding: 18px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 24px;
       text-align: center;
     }
 
-    .hero {
-      background: linear-gradient(135deg, #00843d, #00a651);
-      color: white;
-      padding: 40px 20px;
+    h1 {
+      font-size: 22px;
+      margin-bottom: 28px;
     }
 
-    .hero h1 {
-      margin: 0;
+    .opcoes {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
-    .container {
-      padding: 20px;
-    }
-
-    img {
-      max-width: 300px;
-      width: 100%;
-      margin: 20px auto;
-      display: block;
-    }
-
-    button {
-      padding: 12px 20px;
-      background: #00843d;
-      color: white;
-      border: none;
-      border-radius: 8px;
+    .card {
+      width: 280px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+      overflow: hidden;
       cursor: pointer;
-      font-size: 16px;
+      transition: 0.2s;
     }
 
-    button:hover {
-      background: #006b31;
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .imagem {
+      height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+      background: white;
+    }
+
+    .texto {
+      background: #f3f3f3;
+      padding: 22px;
+    }
+
+    .texto span {
+      display: block;
+      font-size: 14px;
+    }
+
+    .texto strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 18px;
+    }
+
+    .verde {
+      color: #00a651;
+    }
+
+    .laranja {
+      color: #ff7a00;
+    }
+
+    .amarelo {
+      color: #fbbc04;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="hero">
-    <h1>Guardian Simplificado</h1>
-    <p>Registro de Ocorrências</p>
-  </div>
+  <header>Guardian</header>
 
-  <div class="container">
+  <main>
+    <h1>Qual o comportamento você gostaria de registrar?</h1>
 
-    <!-- IMAGEM CORRETA -->
-    <img src="assets/comportamento.png" alt="Comportamento">
+    <div class="opcoes">
 
-    <button onclick="alert('Botão funcionando!')">
-      Registrar ocorrência
-    </button>
+      <div class="card" onclick="selecionar('Comportamento Seguro')">
+        <div class="imagem verde">👥</div>
+        <div class="texto">
+          <span>Cadastrar</span>
+          <strong>Comportamento Seguro</strong>
+        </div>
+      </div>
 
-  </div>
+      <div class="card" onclick="selecionar('Comportamento de Risco')">
+        <div class="imagem laranja">⚠️</div>
+        <div class="texto">
+          <span>Cadastrar</span>
+          <strong>Comportamento de Risco</strong>
+        </div>
+      </div>
+
+      <div class="card" onclick="selecionar('Comportamento Positivo')">
+        <div class="imagem amarelo">⭐</div>
+        <div class="texto">
+          <span>Cadastrar</span>
+          <strong>Comportamento Positivo</strong>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    function selecionar(tipo) {
+      alert("Você selecionou: " + tipo);
+    }
+  </script>
 
 </body>
 </html>
