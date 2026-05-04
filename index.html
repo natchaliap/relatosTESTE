@@ -10,6 +10,316 @@
       margin: 0;
       font-family: Arial, sans-serif;
       background: #f4f6f8;
+      color: #222;
+    }
+
+    header {
+      background: #007a3d;
+      color: white;
+      padding: 16px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .tela {
+      display: none;
+      max-width: 900px;
+      margin: 35px auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .tela.ativa {
+      display: block;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #555;
+    }
+
+    .opcoes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 25px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 26px 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.16);
+      border: 2px solid transparent;
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.22);
+    }
+
+    .card.selecionado {
+      border-color: #00a651;
+      background: #f0fff5;
+    }
+
+    .icone {
+      font-size: 42px;
+      margin-bottom: 12px;
+    }
+
+    .card strong {
+      display: block;
+      font-size: 17px;
+    }
+
+    textarea, input {
+      width: 100%;
+      max-width: 600px;
+      padding: 14px;
+      margin-top: 15px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      height: 120px;
+      resize: none;
+    }
+
+    .botoes {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 13px 24px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .btn-voltar {
+      background: #ddd;
+      color: #333;
+    }
+
+    .btn-proximo {
+      background: #007a3d;
+      color: white;
+    }
+
+    .btn-proximo:hover {
+      background: #006331;
+    }
+
+    .resumo {
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      text-align: left;
+      max-width: 650px;
+      margin: 25px auto;
+    }
+
+    .resumo p {
+      color: #222;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>Guardian</header>
+
+<!-- TELA 1 -->
+<section class="tela ativa" id="tela1">
+  <h1>1. O que você gostaria de registrar?</h1>
+  <p>Escolha uma opção abaixo:</p>
+
+  <div class="opcoes">
+    <div class="card" onclick="selecionarCard(this, 'categoria', 'Comportamento Seguro')">
+      <div class="icone">✅</div>
+      <strong>Comportamento Seguro</strong>
+    </div>
+
+    <div class="card" onclick="selecionarCard(this, 'categoria', 'Comportamento de Risco')">
+      <div class="icone">⚠️</div>
+      <strong>Comportamento de Risco</strong>
+    </div>
+
+    <div class="card" onclick="selecionarCard(this, 'categoria', 'Condição Insegura')">
+      <div class="icone">🚧</div>
+      <strong>Condição Insegura</strong>
+    </div>
+  </div>
+
+  <div class="botoes">
+    <button class="btn-proximo" onclick="proximaTela(2)">Próximo</button>
+  </div>
+</section>
+
+<!-- TELA 2 -->
+<section class="tela" id="tela2">
+  <h1>2. Local da ocorrência</h1>
+  <p>Informe onde aconteceu:</p>
+
+  <input id="local" type="text" placeholder="Ex: Linha 3, Envase, Armazém...">
+
+  <div class="botoes">
+    <button class="btn-voltar" onclick="proximaTela(1)">Voltar</button>
+    <button class="btn-proximo" onclick="salvarLocal()">Próximo</button>
+  </div>
+</section>
+
+<!-- TELA 3 -->
+<section class="tela" id="tela3">
+  <h1>3. Tipo de Comportamento</h1>
+  <p>Selecione o tipo observado:</p>
+
+  <div class="opcoes">
+    <div class="card" onclick="selecionarCard(this, 'tipo', 'Uso de EPI')">
+      <div class="icone">🦺</div>
+      <strong>Uso de EPI</strong>
+    </div>
+
+    <div class="card" onclick="selecionarCard(this, 'tipo', 'Ferramentas e Equipamentos')">
+      <div class="icone">🛠️</div>
+      <strong>Ferramentas e Equipamentos</strong>
+    </div>
+
+    <div class="card" onclick="selecionarCard(this, 'tipo', 'Postura Segura')">
+      <div class="icone">🧍</div>
+      <strong>Postura Segura</strong>
+    </div>
+
+    <div class="card" onclick="selecionarCard(this, 'tipo', 'Bloqueio e Energia')">
+      <div class="icone">🔒</div>
+      <strong>Bloqueio e Energia</strong>
+    </div>
+
+    <div class="card" onclick="selecionarCard(this, 'tipo', 'Organização e Limpeza')">
+      <div class="icone">🧹</div>
+      <strong>Organização e Limpeza</strong>
+    </div>
+
+    <div class="card" onclick="selecionarCard(this, 'tipo', 'Trabalho em Altura')">
+      <div class="icone">🪜</div>
+      <strong>Trabalho em Altura</strong>
+    </div>
+  </div>
+
+  <div class="botoes">
+    <button class="btn-voltar" onclick="proximaTela(2)">Voltar</button>
+    <button class="btn-proximo" onclick="proximaTela(4)">Próximo</button>
+  </div>
+</section>
+
+<!-- TELA 4 -->
+<section class="tela" id="tela4">
+  <h1>4. Descrição</h1>
+  <p>Descreva o que aconteceu:</p>
+
+  <textarea id="descricao" placeholder="Digite aqui a descrição da ocorrência..."></textarea>
+
+  <div class="botoes">
+    <button class="btn-voltar" onclick="proximaTela(3)">Voltar</button>
+    <button class="btn-proximo" onclick="mostrarResumo()">Próximo</button>
+  </div>
+</section>
+
+<!-- TELA 5 -->
+<section class="tela" id="tela5">
+  <h1>5. Revisar Registro</h1>
+  <p>Confira as informações antes de enviar:</p>
+
+  <div class="resumo" id="resumo"></div>
+
+  <div class="botoes">
+    <button class="btn-voltar" onclick="proximaTela(4)">Voltar</button>
+    <button class="btn-proximo" onclick="enviarRegistro()">Enviar Registro</button>
+  </div>
+</section>
+
+<script>
+  let registro = {
+    categoria: "",
+    local: "",
+    tipo: "",
+    descricao: ""
+  };
+
+  function proximaTela(numero) {
+    document.querySelectorAll(".tela").forEach(tela => {
+      tela.classList.remove("ativa");
+    });
+
+    document.getElementById("tela" + numero).classList.add("ativa");
+  }
+
+  function selecionarCard(elemento, campo, valor) {
+    const telaAtual = elemento.closest(".tela");
+
+    telaAtual.querySelectorAll(".card").forEach(card => {
+      card.classList.remove("selecionado");
+    });
+
+    elemento.classList.add("selecionado");
+    registro[campo] = valor;
+  }
+
+  function salvarLocal() {
+    registro.local = document.getElementById("local").value;
+    proximaTela(3);
+  }
+
+  function mostrarResumo() {
+    registro.descricao = document.getElementById("descricao").value;
+
+    document.getElementById("resumo").innerHTML = `
+      <p><strong>Categoria:</strong> ${registro.categoria || "Não informado"}</p>
+      <p><strong>Local:</strong> ${registro.local || "Não informado"}</p>
+      <p><strong>Tipo:</strong> ${registro.tipo || "Não informado"}</p>
+      <p><strong>Descrição:</strong> ${registro.descricao || "Não informado"}</p>
+    `;
+
+    proximaTela(5);
+  }
+
+  function enviarRegistro() {
+    alert("Registro enviado com sucesso!");
+    location.reload();
+  }
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guardian Simplificado</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
       color: #111;
     }
 
