@@ -3,187 +3,914 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guardian Simplificado</title>
+  <title>Relatos | Imediato Nexway</title>
 
   <style>
+    :root {
+      --azul: #002f3f;
+      --azul-escuro: #001f2b;
+      --verde: #00c48c;
+      --verde-hover: #00a874;
+      --fundo: #f3f7f8;
+      --card: #ffffff;
+      --texto: #102027;
+      --muted: #60727a;
+      --borda: #d9e4e7;
+      --sombra: 0 12px 28px rgba(0, 47, 63, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      color: #111;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #eef7f8 0%, var(--fundo) 45%, #ffffff 100%);
+      color: var(--texto);
     }
 
     header {
-      position: relative;
-      background: #007a3d;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--azul);
       color: white;
-      padding: 18px;
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
+      padding: 14px 22px;
+      box-shadow: 0 8px 22px rgba(0, 31, 43, 0.25);
     }
 
-    .btn-voltar {
-      position: absolute;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: white;
-      color: #007a3d;
-      border: none;
-      border-radius: 8px;
-      padding: 8px 12px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    main {
-      padding: 24px;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 22px;
-      margin-bottom: 28px;
-    }
-
-    .opcoes {
-      display: flex;
-      gap: 24px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .card {
-      width: 280px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.18);
-      overflow: hidden;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .card:hover {
-      transform: scale(1.03);
-    }
-
-    .card:active {
-      transform: scale(0.98);
-    }
-
-    .imagem {
-      height: 130px;
+    .header-conteudo {
+      max-width: 1100px;
+      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 64px;
-      background: white;
+      gap: 16px;
+      position: relative;
+      min-height: 48px;
+    }
+
+    .marca {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .marca strong { font-size: 18px; }
+    .marca span { font-size: 14px; opacity: 0.8; }
+
+    .btn-voltar {
+      position: absolute;
+      right: 0;
+      background: rgba(255,255,255,0.12);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+      display: none;
+    }
+
+    .btn-voltar:hover {
+      background: var(--verde);
+      color: var(--azul);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 36px 22px;
+    }
+
+    .hero { text-align: center; margin-bottom: 30px; }
+
+    h1 {
+      font-size: clamp(26px, 4vw, 38px);
+      line-height: 1.15;
+      margin: 0 0 12px;
+      color: var(--azul);
+    }
+
+    .subtitulo {
+      max-width: 640px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .opcoes {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 28px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--borda);
+      border-radius: 22px;
+      box-shadow: var(--sombra);
+      overflow: hidden;
+      cursor: pointer;
+      transition: 0.25s;
+      min-height: 230px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0,196,140,0.55);
+    }
+
+    .imagem {
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 58px;
+      background: linear-gradient(135deg, #f8fbfc, #eef7f8);
     }
 
     .texto {
-      background: #f3f3f3;
       padding: 22px;
-    }
-
-    .texto span {
-      display: block;
-      font-size: 14px;
+      border-top: 1px solid var(--borda);
     }
 
     .texto strong {
       display: block;
-      margin-top: 6px;
-      font-size: 18px;
+      font-size: 17px;
+      color: var(--azul);
+      margin-bottom: 6px;
     }
 
-    .verde {
-      color: #00a651;
+    .texto span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
     }
 
-    .laranja {
-      color: #ff7a00;
+    .verde { color: var(--verde); }
+    .laranja { color: #ff8a00; }
+    .amarelo { color: #fbbc04; }
+
+    .tela { display: none; }
+    .tela.ativa { display: block; }
+
+    .painel {
+      max-width: 820px;
+      margin: 0 auto;
+      background: white;
+      padding: 28px;
+      border-radius: 24px;
+      border: 1px solid var(--borda);
+      box-shadow: var(--sombra);
     }
 
-    .amarelo {
-      color: #fbbc04;
+    .painel-cabecalho { margin-bottom: 22px; }
+    .painel-cabecalho h2 { margin: 0 0 6px; color: var(--azul); font-size: 24px; }
+    .painel-cabecalho p { margin: 0; color: var(--muted); line-height: 1.4; }
+
+    label {
+      display: block;
+      font-weight: bold;
+      color: var(--azul);
+      margin-bottom: 8px;
+      font-size: 14px;
     }
 
-    @media (max-width: 600px) {
-      header {
-        font-size: 18px;
-        padding: 16px;
-      }
+    input, select, textarea {
+      width: 100%;
+      padding: 14px 15px;
+      border-radius: 12px;
+      border: 1px solid var(--borda);
+      margin-bottom: 18px;
+      font-size: 16px;
+      outline: none;
+      background: #ffffff;
+      color: var(--texto);
+      transition: 0.2s;
+    }
 
-      .btn-voltar {
-        left: 10px;
-        padding: 6px 10px;
-        font-size: 12px;
-      }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--verde);
+      box-shadow: 0 0 0 4px rgba(0,196,140,0.12);
+    }
 
-      h1 {
-        font-size: 18px;
-      }
+    .grid-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
 
-      .card {
-        width: 100%;
-        max-width: 320px;
-      }
+    .campo-full { grid-column: 1 / -1; }
+
+    .categoria {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 14px;
+      padding: 16px;
+      background: #f7fbfb;
+      border: 1px solid var(--borda);
+      border-left: 5px solid var(--verde);
+      border-radius: 16px;
+      font-weight: bold;
+      color: var(--azul);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .categoria:hover {
+      background: #eafff8;
+      border-color: rgba(0,196,140,0.45);
+    }
+
+    .categoria-titulo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .categoria-titulo span:first-child { font-size: 24px; }
+
+    .seta {
+      font-size: 20px;
+      color: var(--verde);
+      transition: 0.2s;
+    }
+
+    .seta.aberta { transform: rotate(180deg); }
+
+    .itens-categoria {
+      display: none;
+      margin: 8px 0 4px;
+      padding-left: 10px;
+    }
+
+    .itens-categoria.aberta { display: block; }
+
+    .item-risco {
+      padding: 14px 16px;
+      background: white;
+      border: 1px solid var(--borda);
+      border-radius: 14px;
+      margin-top: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .item-risco:hover {
+      background: #eafff8;
+      border-color: var(--verde);
+      transform: translateX(4px);
+      font-weight: bold;
+    }
+
+    .selecionado {
+      margin-top: 8px;
+      padding: 15px;
+      background: #eafff8;
+      border-left: 5px solid var(--verde);
+      border-radius: 12px;
+      font-weight: bold;
+      color: var(--azul);
+    }
+
+    .acoes {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn-salvar, .btn-secundario {
+      border: none;
+      border-radius: 14px;
+      padding: 15px 18px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-salvar { flex: 1; background: var(--verde); color: var(--azul); }
+    .btn-salvar:hover { background: var(--verde-hover); transform: translateY(-2px); }
+    .btn-secundario { background: #eef4f5; color: var(--azul); border: 1px solid var(--borda); }
+    .btn-secundario:hover { background: #e1ecef; }
+
+    .mensagem-sucesso {
+      margin-top: 16px;
+      padding: 14px;
+      background: #eafff8;
+      color: var(--azul);
+      border: 1px solid rgba(0,196,140,0.35);
+      border-radius: 12px;
+      font-weight: bold;
+      display: none;
+    }
+
+    .tabela-container {
+      width: 100%;
+      overflow-x: auto;
+      margin-top: 18px;
+      border: 1px solid var(--borda);
+      border-radius: 16px;
+    }
+
+    table { width: 100%; border-collapse: collapse; min-width: 900px; background: white; }
+    th, td { padding: 12px; border-bottom: 1px solid var(--borda); text-align: left; font-size: 14px; vertical-align: top; }
+    th { background: #f7fbfb; color: var(--azul); font-weight: bold; }
+
+    .estado-vazio {
+      padding: 20px;
+      background: #f7fbfb;
+      border: 1px dashed var(--borda);
+      border-radius: 14px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 18px;
+    }
+
+    .login-wrapper {
+      min-height: calc(100vh - 150px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 0;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 430px;
+      background: white;
+      border: 1px solid var(--borda);
+      border-radius: 26px;
+      box-shadow: var(--sombra);
+      padding: 30px;
+    }
+
+    .login-card h1 { text-align: center; font-size: 28px; margin-bottom: 8px; }
+    .login-card p { text-align: center; color: var(--muted); margin-bottom: 24px; line-height: 1.4; }
+
+    .rodape {
+      margin-top: 48px;
+      padding: 22px 0 8px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .rodape strong { color: var(--azul); }
+
+    @media (max-width: 760px) {
+      .header-conteudo { flex-direction: column; }
+      .btn-voltar { position: static; width: 100%; }
+      .opcoes { grid-template-columns: 1fr; }
+      .grid-form { grid-template-columns: 1fr; }
+      .acoes { flex-direction: column; }
+      main { padding: 24px 14px; }
+      .painel { padding: 20px; border-radius: 18px; }
     }
   </style>
 </head>
 
 <body>
+<header>
+  <div class="header-conteudo">
+    <div class="marca" onclick="mostrar('telaInicial')">
+      <strong>Imediato Nexway</strong>
+      <span>Relatos, registro de comportamentos e ocorrências</span>
+    </div>
+    <button id="btnVoltar" class="btn-voltar" onclick="voltarTela()">← Voltar</button>
+    <button id="btnSair" class="btn-voltar" style="display:none; right:110px;" onclick="sair()">Sair</button>
+  </div>
+</header>
 
-  <header>
-    <button class="btn-voltar" onclick="voltarTela()">← Voltar</button>
-    Guardian
-  </header>
+<main>
+  <section id="telaLogin" class="tela">
+    <div class="login-wrapper">
+      <div class="login-card">
+        <h1>Relatos</h1>
+        <p>Acesse com matrícula e senha para registrar ou consultar relatos.</p>
+        <label>Matrícula</label>
+        <input type="text" id="loginMatricula" placeholder="Digite sua matrícula">
+        <label>Senha</label>
+        <input type="password" id="loginSenha" placeholder="Digite sua senha">
+        <button class="btn-salvar" onclick="fazerLogin()">Entrar</button>
+        <div id="mensagemLogin" class="mensagem-sucesso"></div>
+      </div>
+    </div>
+  </section>
 
-  <main>
-    <h1>Qual o comportamento você gostaria de registrar?</h1>
+  <section id="telaInicial" class="tela ativa">
+    <div class="hero">
+      <h1>Qual comportamento você gostaria de registrar?</h1>
+      <p class="subtitulo">Escolha uma categoria para iniciar o registro. O processo é rápido, organizado e ajuda a fortalecer a segurança operacional.</p>
+    </div>
+
+    <div class="acoes" style="justify-content:center; margin-bottom: 28px;">
+      <button class="btn-secundario" onclick="verRelatos()">Ver relatos</button>
+    </div>
 
     <div class="opcoes">
-
-      <div class="card" onclick="selecionar('Comportamento de Risco')">
+      <div class="card" onclick="selecionarTipo('risco')">
         <div class="imagem laranja">⚠️</div>
         <div class="texto">
-          <span>Cadastrar</span>
           <strong>Comportamento de Risco</strong>
+          <span>Registre desvios, condições inseguras ou situações com potencial de acidente.</span>
         </div>
       </div>
 
-      <div class="card" onclick="selecionar('Comportamento Seguro')">
-        <div class="imagem verde">👥</div>
+      <div class="card" onclick="selecionarTipo('condicao')">
+        <div class="imagem verde">🧱</div>
         <div class="texto">
-          <span>Cadastrar</span>
-          <strong>Comportamento Seguro</strong>
+          <strong>Condição</strong>
+          <span>Registre condições inseguras relacionadas a equipamentos, ambiente e estrutura.</span>
         </div>
       </div>
 
-      <div class="card" onclick="selecionar('Comportamento Positivo')">
+      <div class="card" onclick="selecionarTipo('positivo')">
         <div class="imagem amarelo">⭐</div>
         <div class="texto">
-          <span>Cadastrar</span>
           <strong>Comportamento Positivo</strong>
+          <span>Destaque ações exemplares, colaboração e iniciativas de melhoria.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="telaRisco" class="tela">
+    <div class="painel">
+      <div class="painel-cabecalho">
+        <h2>Comportamento de Risco</h2>
+        <p>Pesquise ou selecione uma categoria abaixo para visualizar as opções disponíveis.</p>
+      </div>
+      <input type="text" placeholder="Buscar comportamento de risco..." oninput="filtrarRiscos()" id="busca">
+      <div id="lista"></div>
+    </div>
+  </section>
+
+  <section id="telaCondicao" class="tela">
+    <div class="painel">
+      <div class="painel-cabecalho">
+        <h2>Condição</h2>
+        <p>Selecione a condição insegura relacionada a equipamentos, ambiente ou estrutura.</p>
+      </div>
+      <input type="text" placeholder="Buscar condição..." oninput="filtrarCondicoes()" id="buscaCondicao">
+      <div id="listaCondicao"></div>
+    </div>
+  </section>
+
+  <section id="telaFormulario" class="tela">
+    <div class="painel">
+      <div class="painel-cabecalho">
+        <h2>1. Informações Gerais</h2>
+        <p>Preencha os dados principais para salvar o relato selecionado.</p>
+      </div>
+
+      <div id="resumoRisco" class="selecionado"></div>
+
+      <div class="grid-form" style="margin-top: 22px;">
+        <div>
+          <label>Data</label>
+          <input type="date" id="data">
+        </div>
+        <div>
+          <label>Hora</label>
+          <input type="time" id="hora">
+        </div>
+        <div class="campo-full">
+          <label>Local da Ocorrência</label>
+          <select id="local" onchange="verificarLocal()">
+            <option value="">Selecione...</option>
+            <option>PORTARIA</option>
+            <option>PÁTIO</option>
+            <option>ARMAZÉM</option>
+            <option>BOLSÃO</option>
+            <option value="OUTROS">OUTROS</option>
+          </select>
+          <input type="text" id="outroLocal" placeholder="Digite o local..." style="display:none;">
+        </div>
+        <div>
+          <label>Nome do Relatado (opcional)</label>
+          <input type="text" id="nomeRelatado" placeholder="Digite o nome...">
+        </div>
+        <div>
+          <label>Empresa</label>
+          <select id="empresa">
+            <option value="">Selecione...</option>
+            <option>JAJA</option>
+            <option>BEBEB</option>
+            <option>OUTRAS</option>
+          </select>
+        </div>
+        <div class="campo-full">
+          <label>Observação</label>
+          <textarea id="observacao" rows="4" placeholder="Descreva detalhes relevantes sobre o relato..."></textarea>
         </div>
       </div>
 
+      <div class="acoes">
+        <button class="btn-secundario" onclick="voltarTela()">Voltar</button>
+        <button class="btn-salvar" onclick="salvarRelato()">Salvar relato</button>
+      </div>
+      <div id="mensagemSucesso" class="mensagem-sucesso"></div>
     </div>
-  </main>
+  </section>
 
-  <script>
-    function selecionar(tipo) {
-      localStorage.setItem("tipoRegistro", tipo);
+  <section id="telaRelatos" class="tela">
+    <div class="painel">
+      <div class="painel-cabecalho">
+        <h2>Relatos Salvos</h2>
+        <p id="descricaoRelatos">Consulte os relatos registrados neste navegador.</p>
+      </div>
+      <div class="acoes">
+        <button class="btn-secundario" onclick="mostrar('telaInicial')">Novo relato</button>
+      </div>
+      <div id="areaRelatos"></div>
+    </div>
+  </section>
 
-      // Altere aqui para o nome da próxima tela
-      window.location.href = "formulario.html";
+  <footer class="rodape">Criado por <strong>Natalia Pereira</strong></footer>
+</main>
+
+<script>
+const LOGIN_ATIVO = false;
+
+const riscos = {
+  "Comportamento": { icone:"🏃", itens:[
+    "Correndo/apressando-se na área",
+    "Houve multitarefas arriscadas/distração",
+    "Uso de celular durante atividade",
+    "Postura inadequada ao executar tarefa",
+    "Não seguiu procedimento operacional"
+  ]},
+  "EPI": { icone:"🦺", itens:[
+    "Falta de óculos de segurança",
+    "Falta de luvas",
+    "Uso incorreto de capacete",
+    "EPI danificado",
+    "Não utilização de protetor auricular"
+  ]},
+  "Equipamentos": { icone:"⚙️", itens:[
+    "Equipamento sem proteção",
+    "Equipamento com falha",
+    "Falta de manutenção preventiva",
+    "Uso inadequado do equipamento",
+    "Ferramenta improvisada"
+  ]},
+  "Ambiente": { icone:"🏭", itens:[
+    "Área desorganizada",
+    "Piso escorregadio",
+    "Iluminação insuficiente ou ausente",
+    "Obstrução de passagem",
+    "Sinalização inadequada"
+  ]},
+  "Ergonomia": { icone:"🪑", itens:[
+    "Levantamento de peso incorreto",
+    "Movimentos repetitivos sem pausa",
+    "Altura inadequada de bancada",
+    "Esforço excessivo",
+    "Postura forçada"
+  ]}
+};
+
+const condicoes = {
+  "Organização (5S / Sinalização)": { icone:"🧱", itens:[
+    "5S não aplicado",
+    "Ausência ou sinalização insuficiente"
+  ]},
+  "Produto / Embalagem": { icone:"📦", itens:[
+    "Embalagem ou produto caindo (caixa, barril, latas, garrafas, paletes)",
+    "Embalagem ou produto ejetado (caixa, barril, latas, garrafas, paletes)"
+  ]},
+  "EPI": { icone:"🦺", itens:["EPI em más condições ou não adequado"]},
+  "Equipamentos": { icone:"⚙️", itens:[
+    "Equipamento com inspeção vencida",
+    "Equipamento em más condições",
+    "Equipamento não conforme aos padrões (excluindo danos)",
+    "Equipamento não conforme aos padrões (proteções - excluindo danos)",
+    "Equipamento não conforme aos padrões (sensores de segurança - excluindo danos)",
+    "Partes móveis expostas"
+  ]},
+  "Ferramentas": { icone:"🛠️", itens:[
+    "Ferramenta com inspeção vencida",
+    "Ferramenta em más condições",
+    "Ferramenta não conforme aos padrões (excluindo danos)"
+  ]},
+  "Ambiente / Estrutura": { icone:"🏭", itens:[
+    "Iluminação insuficiente ou ausente",
+    "Objeto balançando",
+    "Parte da estrutura do prédio caindo"
+  ]},
+  "Procedimentos": { icone:"📄", itens:["Procedimento (POP) não atualizado ou ausente"]}
+};
+
+let riscoSelecionado = "";
+let tipoSelecionado = "";
+let telaAnteriorFormulario = "telaInicial";
+let usuarioAtual = { matricula: "teste", perfil: "admin" };
+
+function byId(id){ return document.getElementById(id); }
+function safeSetHTML(id, html){ const el = byId(id); if(el) el.innerHTML = html; }
+function safeDisplay(id, display){ const el = byId(id); if(el) el.style.display = display; }
+
+function inicializarUsuarios(){
+  const usuarios = JSON.parse(localStorage.getItem("usuariosRelatos") || "[]");
+  if(usuarios.length === 0){
+    localStorage.setItem("usuariosRelatos", JSON.stringify([
+      { matricula: "admin", senha: "admin123", nome: "Administrador", perfil: "admin" },
+      { matricula: "12345", senha: "12345", nome: "12345", perfil: "user" },
+      { matricula: "67890", senha: "67890", nome: "67890", perfil: "user" }
+    ]));
+  }
+}
+
+function fazerLogin(){
+  const matricula = byId("loginMatricula").value.trim();
+  const senha = byId("loginSenha").value.trim();
+  const usuarios = JSON.parse(localStorage.getItem("usuariosRelatos") || "[]");
+  const usuario = usuarios.find(u => u.matricula === matricula && u.senha === senha);
+
+  if(!usuario){
+    safeSetHTML("mensagemLogin", "Matrícula ou senha inválida.");
+    safeDisplay("mensagemLogin", "block");
+    return;
+  }
+
+  usuarioAtual = usuario;
+  sessionStorage.setItem("usuarioAtualRelatos", JSON.stringify(usuario));
+  safeDisplay("btnSair", "block");
+  safeDisplay("mensagemLogin", "none");
+  mostrar("telaInicial");
+}
+
+function sair(){
+  usuarioAtual = null;
+  sessionStorage.removeItem("usuarioAtualRelatos");
+  safeDisplay("btnSair", "none");
+  const senha = byId("loginSenha");
+  if(senha) senha.value = "";
+  mostrar("telaLogin");
+}
+
+function selecionarTipo(tipo){
+  if(tipo === "risco"){
+    mostrar("telaRisco");
+    renderizarRiscos();
+  } else if(tipo === "condicao"){
+    mostrar("telaCondicao");
+    renderizarCondicoes();
+  } else {
+    alert("Selecionado: " + tipo);
+  }
+}
+
+function mostrar(id){
+  document.querySelectorAll(".tela").forEach(t => t.classList.remove("ativa"));
+  const tela = byId(id);
+  if(!tela) return;
+  tela.classList.add("ativa");
+
+  const btnVoltar = byId("btnVoltar");
+  if(btnVoltar){
+    btnVoltar.style.display = (id === "telaLogin" || id === "telaInicial") ? "none" : "block";
+  }
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function criarListaAcordeao(containerId, dados, filtro, abertoPorPadrao){
+  const lista = byId(containerId);
+  if(!lista) return;
+  lista.innerHTML = "";
+
+  Object.keys(dados).forEach(cat => {
+    const grupo = dados[cat];
+    const itens = grupo.itens.filter(i => i.toLowerCase().includes(filtro.toLowerCase()));
+    if(!itens.length) return;
+
+    const divCat = document.createElement("div");
+    divCat.className = "categoria";
+    divCat.innerHTML = `
+      <div class="categoria-titulo">
+        <span>${grupo.icone}</span>
+        <span>${cat}</span>
+      </div>
+      <span class="seta ${abertoPorPadrao ? "aberta" : ""}">⌄</span>
+    `;
+    lista.appendChild(divCat);
+
+    const divItens = document.createElement("div");
+    divItens.className = `itens-categoria ${abertoPorPadrao ? "aberta" : ""}`;
+    lista.appendChild(divItens);
+
+    divCat.onclick = () => {
+      divItens.classList.toggle("aberta");
+      divCat.querySelector(".seta").classList.toggle("aberta");
+    };
+
+    itens.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "item-risco";
+      div.textContent = item;
+      div.onclick = () => selecionarRisco(item);
+      divItens.appendChild(div);
+    });
+  });
+}
+
+function renderizarRiscos(filtro=""){
+  criarListaAcordeao("lista", riscos, filtro, false);
+}
+
+function filtrarRiscos(){
+  const busca = byId("busca");
+  renderizarRiscos(busca ? busca.value : "");
+}
+
+function renderizarCondicoes(filtro=""){
+  criarListaAcordeao("listaCondicao", condicoes, filtro, false);
+}
+
+function filtrarCondicoes(){
+  const busca = byId("buscaCondicao");
+  renderizarCondicoes(busca ? busca.value : "");
+}
+
+function selecionarRisco(risco){
+  riscoSelecionado = risco;
+  tipoSelecionado = riscoEhCondicao(risco) ? "Condição" : "Comportamento de Risco";
+  telaAnteriorFormulario = document.querySelector(".tela.ativa")?.id || "telaInicial";
+  safeSetHTML("resumoRisco", `Relato selecionado: ${risco}`);
+  safeDisplay("mensagemSucesso", "none");
+  mostrar("telaFormulario");
+}
+
+function riscoEhCondicao(texto){
+  return Object.values(condicoes).some(grupo => grupo.itens.includes(texto));
+}
+
+function voltarTela(){
+  const ativa = document.querySelector(".tela.ativa")?.id;
+  if(ativa === "telaFormulario") mostrar(telaAnteriorFormulario || "telaInicial");
+  else if(ativa === "telaRisco" || ativa === "telaCondicao" || ativa === "telaRelatos") mostrar("telaInicial");
+  else mostrar("telaInicial");
+}
+
+function verificarLocal(){
+  const local = byId("local")?.value;
+  const campo = byId("outroLocal");
+  if(!campo) return;
+  if(local === "OUTROS") campo.style.display = "block";
+  else { campo.style.display = "none"; campo.value = ""; }
+}
+
+function salvarRelato(){
+  const data = byId("data").value;
+  const hora = byId("hora").value;
+  const local = byId("local").value;
+  const outroLocal = byId("outroLocal").value;
+  const nomeRelatado = byId("nomeRelatado").value;
+  const empresa = byId("empresa").value;
+  const observacao = byId("observacao").value;
+
+  if(!data || !hora || !local || !empresa){
+    alert("Preencha data, hora, local da ocorrência e empresa antes de salvar.");
+    return;
+  }
+
+  if(local === "OUTROS" && !outroLocal.trim()){
+    alert("Digite o local da ocorrência.");
+    return;
+  }
+
+  const relato = {
+    usuario: usuarioAtual ? usuarioAtual.matricula : "teste",
+    tipo: tipoSelecionado,
+    risco: riscoSelecionado,
+    data,
+    hora,
+    local: local === "OUTROS" ? outroLocal : local,
+    nomeRelatado,
+    empresa,
+    observacao,
+    criadoEm: new Date().toLocaleString("pt-BR")
+  };
+
+  const relatosSalvos = JSON.parse(localStorage.getItem("relatos") || "[]");
+  relatosSalvos.push(relato);
+  localStorage.setItem("relatos", JSON.stringify(relatosSalvos));
+
+  safeSetHTML("mensagemSucesso", "✅ Relato salvo com sucesso! Você pode consultar em Ver relatos.");
+  safeDisplay("mensagemSucesso", "block");
+}
+
+function verRelatos(){
+  mostrar("telaRelatos");
+  renderizarRelatos();
+}
+
+function obterRelatosPermitidos(){
+  const todosRelatos = JSON.parse(localStorage.getItem("relatos") || "[]");
+  if(!LOGIN_ATIVO) return todosRelatos;
+  if(usuarioAtual && usuarioAtual.perfil === "admin") return todosRelatos;
+  return todosRelatos.filter(relato => relato.usuario === (usuarioAtual ? usuarioAtual.matricula : ""));
+}
+
+function renderizarRelatos(){
+  const area = byId("areaRelatos");
+  const descricao = byId("descricaoRelatos");
+  const relatos = obterRelatosPermitidos();
+  if(!area) return;
+
+  if(descricao){
+    descricao.innerHTML = LOGIN_ATIVO
+      ? "Consulte os relatos disponíveis para sua matrícula."
+      : "Login desabilitado temporariamente. Consulte os relatos salvos neste navegador.";
+  }
+
+  if(relatos.length === 0){
+    area.innerHTML = `<div class="estado-vazio">Nenhum relato salvo até o momento.</div>`;
+    return;
+  }
+
+  const linhas = relatos.map((relato, index) => `
+    <tr>
+      <td>${index + 1}</td>
+      <td>${relato.tipo || ""}</td>
+      <td>${relato.usuario || ""}</td>
+      <td>${relato.data || ""}</td>
+      <td>${relato.hora || ""}</td>
+      <td>${relato.risco || ""}</td>
+      <td>${relato.local || ""}</td>
+      <td>${relato.nomeRelatado || ""}</td>
+      <td>${relato.empresa || ""}</td>
+      <td>${relato.observacao || ""}</td>
+      <td>${relato.criadoEm || ""}</td>
+    </tr>
+  `).join("");
+
+  area.innerHTML = `
+    <div class="tabela-container">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tipo</th>
+            <th>Usuário</th>
+            <th>Data</th>
+            <th>Hora</th>
+            <th>Relato</th>
+            <th>Local</th>
+            <th>Nome do relatado</th>
+            <th>Empresa</th>
+            <th>Observação</th>
+            <th>Salvo em</th>
+          </tr>
+        </thead>
+        <tbody>${linhas}</tbody>
+      </table>
+    </div>
+  `;
+}
+
+function executarTestesBasicos(){
+  console.assert(!!byId("telaInicial"), "Teste: telaInicial deve existir");
+  console.assert(!!byId("btnVoltar"), "Teste: botão voltar deve existir");
+  console.assert(Object.keys(riscos).length > 0, "Teste: riscos deve conter categorias");
+  console.assert(Object.keys(condicoes).length > 0, "Teste: condições deve conter categorias");
+  console.assert(typeof mostrar === "function", "Teste: mostrar deve existir");
+}
+
+window.onload = function(){
+  inicializarUsuarios();
+
+  if(LOGIN_ATIVO){
+    const usuarioSessao = JSON.parse(sessionStorage.getItem("usuarioAtualRelatos") || "null");
+    if(usuarioSessao){
+      usuarioAtual = usuarioSessao;
+      safeDisplay("btnSair", "block");
+      mostrar("telaInicial");
+    } else {
+      mostrar("telaLogin");
     }
+  } else {
+    usuarioAtual = { matricula: "teste", perfil: "admin" };
+    safeDisplay("btnSair", "none");
+    mostrar("telaInicial");
+  }
 
-    function voltarTela() {
-      window.history.back();
-    }
-  </script>
-
+  executarTestesBasicos();
+};
+</script>
 </body>
 </html>
